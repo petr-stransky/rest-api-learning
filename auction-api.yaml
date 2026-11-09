@@ -1,0 +1,89 @@
+openapi: 3.0.3
+info:
+  title: Auction API
+  version: 1.0.0
+paths:
+  /auctions/{id}:
+    get:
+      summary: Detail aukce
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Aukce nalezena
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  status:
+                    type: string
+                    enum: [open, closed]
+        '404':
+          description: Aukce neexistuje
+  /auctions:
+    get:
+      summary: Seznam aukcí
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [open, closed]
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Seznam aukcí (může být prázdný)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    status:
+                      type: string
+                      enum: [open, closed]
+  /auctions/{id}/bids:
+    post:
+      summary: Podat nabídku
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [bidder_id, bid]
+              properties:
+                bidder_id:
+                  type: integer
+                bid:
+                  type: number
+      responses:
+        '201':
+          description: Nabídka vytvořena
+        '400':
+          description: Neplatná data
+        '404':
+          description: Aukce neexistuje
+        '422':
+          description: Nabídka je pod minimem
