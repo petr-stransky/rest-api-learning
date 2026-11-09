@@ -18,13 +18,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  status:
-                    type: string
-                    enum: [open, closed]
+                $ref: '#/components/schemas/Auction'
         '404':
           description: Aukce neexistuje
   /auctions:
@@ -50,13 +44,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    status:
-                      type: string
-                      enum: [open, closed]
+                  $ref: '#/components/schemas/Auction'
   /auctions/{id}/bids:
     post:
       summary: Podat nabídku
@@ -87,3 +75,39 @@ paths:
           description: Aukce neexistuje
         '422':
           description: Nabídka je pod minimem
+components:
+  schemas:
+    Seller:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Bid:
+      type: object
+      properties:
+        id:
+          type: integer
+        bidder_id:
+          type: integer
+        bid:
+          type: number
+    Auction:
+      type: object
+      required: [id, status]
+      properties:
+        id:
+          type: integer
+        status:
+          type: string
+          enum: [open, closed]
+        winner_id:
+          type: integer
+          nullable: true
+        seller:
+          $ref: '#/components/schemas/Seller'
+        bids:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bid'
