@@ -1,27 +1,34 @@
 # REST API Learning
 
-Notes and exercises from my self-study of REST APIs, written from a business analyst's point of view.
+Hands-on practice with REST APIs and OpenAPI. Each file is a small, self-written API description that I built step by step while learning.
 
-## What is in this repository
+## Samples
 
-- `auction-api.yaml`: an OpenAPI 3.0 specification of a simple, fictional Auction API with three operations:
-  - `GET /auctions/{id}`: auction detail
-  - `GET /auctions`: list of auctions with `status` and `limit` query parameters
-  - `POST /auctions/{id}/bids`: place a bid, with request body validation and error responses (`201`, `400`, `404`, `422`)
+| File | What it describes |
+|------|-------------------|
+| `auction-api.yaml` | Auction API: auction detail, filtered list, placing a bid (`POST` with 201/400/404/422 responses) |
+| `reviews-api.yaml` | Reviews API: review detail, list with optional `min_rating` filter, reusable `Review` schema |
+
+Both files are valid OpenAPI 3.0.3 and can be pasted into [editor.swagger.io](https://editor.swagger.io).
 
 ## What I practised
 
-- HTTP methods, status codes and the difference between `401` and `403`, `400` and `422`
-- Path parameters, query parameters, headers and request bodies
-- Reading and writing OpenAPI specifications (YAML), including required fields and enums
-- Testing public APIs in Postman
-
-## How to view the specification
-
-Paste the contents of `auction-api.yaml` into [Swagger Editor](https://editor.swagger.io) to see the rendered documentation.
+- HTTP methods (GET, POST, PUT, PATCH, DELETE) and status codes (2xx, 4xx, 5xx)
+- Path, query and body parameters
+- Authentication vs authorization (401 vs 403, API key, Bearer token, OAuth 2.0)
+- OpenAPI structure: `paths`, `parameters`, `requestBody`, `responses`
+- Reusable schemas with `components` and `$ref`
+- Required vs optional vs nullable fields
+- Testing real APIs in Postman
 
 ## Next steps
 
-- Nested objects and reusable schemas (`$ref`)
-- Pagination, versioning and error format conventions
-- SQL for data analysis
+- [ ] Pagination, a unified error format, versioning
+- [ ] Idempotency, rate limiting (429), asynchronous calls (202, webhooks)
+- [ ] API design and naming conventions
+- [ ] API testing and mocking
+- [ ] SQL basics
+
+## Note
+
+All examples are fictional and created for learning purposes only.
