@@ -1,15 +1,22 @@
 # REST API Learning
 
-Hands-on practice with REST APIs and OpenAPI. Each file is a small, self-written API description that I built step by step while learning.
+Hands-on practice with REST APIs and OpenAPI. Each file is a small, self-written sample that I built step by step while learning.
 
 ## Samples
 
-| File | What it describes |
-|------|-------------------|
+| File | What it contains |
+|------|------------------|
 | `auction-api.yaml` | Auction API: auction detail, filtered list, placing a bid (`POST` with 201/400/404/422 responses) |
 | `reviews-api.yaml` | Reviews API: review detail, list with optional `min_rating` filter, reusable `Review` schema |
+| `rest-api-practice.postman_collection.json` | Postman collection: `POST` request with a JSON body and an automated test (status 201) |
 
-Both files are valid OpenAPI 3.0.3 and can be pasted into [editor.swagger.io](https://editor.swagger.io).
+The two `.yaml` files are valid OpenAPI 3.0.3 and can be pasted into [editor.swagger.io](https://editor.swagger.io).
+
+### How to run the Postman collection
+
+1. Import the `.json` file into Postman.
+2. Create an environment with a variable `baseUrl` = `https://jsonplaceholder.typicode.com`.
+3. Select the environment, open the request and press **Send**. Expected result: `201 Created` and the test passes.
 
 ## What I practised
 
@@ -19,7 +26,7 @@ Both files are valid OpenAPI 3.0.3 and can be pasted into [editor.swagger.io](ht
 - OpenAPI structure: `paths`, `parameters`, `requestBody`, `responses`
 - Reusable schemas with `components` and `$ref`
 - Required vs optional vs nullable fields
-- Testing real APIs in Postman
+- Postman: `POST` with JSON body, environment variables, collections, automated tests
 
 ## Next steps
 
